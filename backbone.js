@@ -1247,7 +1247,7 @@
     // Change the view's element (`this.el` property) and re-delegate the
     // view's events on the new element.
     setElement: function(element) {
-      this.undelegateEvents();
+      // this.undelegateEvents();
       this._setElement(element);
       this.delegateEvents();
       return this;
@@ -1302,7 +1302,11 @@
     // You usually don't need to use this, but may wish to if you have multiple
     // Backbone views attached to the same DOM element.
     undelegateEvents: function() {
-      if (this.$el) this.$el.off('.delegateEvents' + this.cid);
+      if (this.$el){
+        this.$el.off('.delegateEvents' + this.cid);
+      } else if (this.el){
+        $(this.el).off();
+      }
       return this;
     },
 
